@@ -1,28 +1,26 @@
-from flask import Flask,render_template
+from flask import Flask, render_template, url_for, flash, redirect
+from forms import RegistrationForm
 
 app = Flask(__name__)
 
-student_data = {
-    1: {"name":"슈퍼맨","score":{"국어":90,"수학":65}},
-    2: {"name":"배트맨","score":{"국어":75,"영어":80,"수학":75}}
-}
+#CSRF(Cross-Site Request Forgery)
+app.config["SECRET_KEY"] = 'd2707fea9778e085491e2dbbc73ff30e'
 
 @app.route('/')
-def index():
-    return render_template('index.html',template_students = student_data)
+def login():
+    form = RegistrationForm()
+    return render_template('login.html',form=form)
 
-@app.route("/student/<int:id>")
-def student(id):
-    return render_template("student.html",template_name=student_data[id]["name"],template_score=student_data[id]["score"])
-
-@app.route('/home')
 def home():
-    return 'hello home'
+    return render_template('layout.html')
 
-@app.route('/user/<user_name>/<int:user_id>')
-def user(user_name,user_id):
-    #return 'hello user'
-    return f'Hello, {user_name}({user_id})!'
+@app.route('/register', methods=["GET","POST"])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'{form.username.data}님 가입 완료!','success')
+        return redirect(url_for('home'))
+    return render_template('register.html',form=form)
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     app.run(debug=True)
