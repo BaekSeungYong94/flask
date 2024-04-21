@@ -14,3 +14,11 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField("비밀번호 확인",
                                      validators=[DataRequired(),EqualTo("password")])
     submit = SubmitField("가입")
+
+class LoginForm(FlaskForm):
+    username = StringField("아이디",
+                           validators=[DataRequired(),Length(min=4,max=20)])
+    password = PasswordField("비밀번호",
+                             validators=[DataRequired(),Length(min=4,max=20)])
+    submit = SubmitField("로그인")
+    join = SubmitField("회원가입")

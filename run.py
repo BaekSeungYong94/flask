@@ -1,14 +1,14 @@
 from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm
-
+from forms import RegistrationForm,LoginForm
+import secrets
 app = Flask(__name__)
 
 #CSRF(Cross-Site Request Forgery)
-app.config["SECRET_KEY"] = 'd2707fea9778e085491e2dbbc73ff30e'
+app.config["SECRET_KEY"] = secrets.token_hex(16)
 
 @app.route('/')
 def login():
-    form = RegistrationForm()
+    form = LoginForm()
     return render_template('login.html',form=form)
 
 def home():
