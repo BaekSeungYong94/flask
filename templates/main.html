@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="content-section">
+        <ul>
+            {% for key,value in title | dictsort %}
+                <li><a href="/post/{{ key }}">{{value["title"]}}</a></li>
+            {% endfor %}
+        </ul>
+
+
+         
+
+        
+        
+        <form method="get" action="/post">
+            {{ form.post(class="form-control form-control-lg") }}
+        </form>
+    </div>
+
+{% endblock content %}
