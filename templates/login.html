@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="content-section">
-        <form method="get", action="">
+        <form method="post", action="/main">
 
             {{ form.hidden_tag() }}
 
@@ -20,7 +20,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.username(class="form-control form-control-lg")}}
+                        <p name="userID">{{ form.username(class="form-control form-control-lg")}}</p>
                     {% endif %}
                 </div>
 
@@ -34,13 +34,21 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form-control form-control-lg")}}
+                        <p name="password">{{ form.password(class="form-control form-control-lg")}}</p>
                     {% endif %}
                 </div>
+                <form method="post" action="/main">
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info")}}
+                    
+                    </div>
+                </form>
             </fieldset>
-            {{ form.submit(class="btn btn-outline-info")}}
-            {{ form.join(class="btn btn-outline-info")}}
+            
         </form>
     </div>
+    <a name="join" href="/register">
+        {{ form.join(class="btn btn-outline-info")}}
+    </a>
 
 {% endblock content %}
