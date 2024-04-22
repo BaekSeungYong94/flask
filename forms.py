@@ -1,7 +1,7 @@
 #회원 가입을 위한 form을 구성하는 파일을 만듬
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField,TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class RegistrationForm(FlaskForm):
@@ -22,3 +22,7 @@ class LoginForm(FlaskForm):
                              validators=[DataRequired(),Length(min=4,max=20)])
     submit = SubmitField("로그인")
     join = SubmitField("회원가입")
+
+class MainForm(FlaskForm):
+    text = TextAreaField("입력")
+    post = SubmitField("작성")
